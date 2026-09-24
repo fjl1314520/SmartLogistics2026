@@ -1,0 +1,23 @@
+# Keil / MDK build outputs
+Objects/
+Listings/
+*.uvguix.*
+*.bak
+*.dep
+*.d
+*.crf
+*.o
+*.lst
+*.lnp
+*.htm
+*.axf
+*.sct.tmp
+
+# Debugger
+JLinkLog.txt
+JLinkSettings.ini
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
