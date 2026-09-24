@@ -37,7 +37,7 @@ void Chassis_Init(void)
  */
 void Chassis_Reset(void)
 {
-	HWT101_CheckYaw=HWT101_Yaw+HWT101_CheckYaw;
+	HWT101_CheckYaw=HWT101_Yaw;//修复：原为累加式(HWT101_Yaw+HWT101_CheckYaw)，被调用两次时零点偏移
 }
 
 /*

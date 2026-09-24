@@ -136,12 +136,16 @@ void QR_Scan(void)
 {
 	if(Test[0]!=0)return;
 	
+	uint16_t QR_Timeout=0;//超时计数
+	#define QR_SCAN_TIMEOUT 20//超时阈值，单位500ms，即10秒
 	while(1)
 	{
 		QR_DMASendReset();
 		
 		Delay_ms(500);
 		if(Test[0]!=0)break;
+		
+		if(++QR_Timeout>=QR_SCAN_TIMEOUT)break;//超时退出，防止二维码模块失联卡死
 	}
 }
 

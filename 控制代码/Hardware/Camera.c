@@ -154,6 +154,8 @@ void Camera_SendMode(Camera_Mode Mode)
 void Camera_GotoMode(Camera_Mode Mode)
 {
 	Camera_WuLiaoRxFlag=Camera_SeHuanRxFlag=0;
+	uint16_t Camera_Timeout=0;//超时计数
+	#define CAMERA_GOTO_TIMEOUT 500//超时阈值，单位10ms，即5秒
 	while(1)
 	{
 		Camera_SendMode(Mode);
@@ -161,6 +163,7 @@ void Camera_GotoMode(Camera_Mode Mode)
 		if(Mode==WuLiao && Camera_WuLiaoRxFlag==1)break;
 		if((Mode==SeHuan_R || Mode==SeHuan_G || Mode==SeHuan_B) && Camera_SeHuanRxFlag==1)break;
 		
+		if(++Camera_Timeout>=CAMERA_GOTO_TIMEOUT)break;//超时退出，防止视觉失联卡死
 		Delay_ms(10);
 	}
 }
